@@ -1,0 +1,79 @@
+﻿
+@model IEnumerable<UScooter.Models.Rental>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<br />
+<div class="container">
+    <h2 class="custom-text">Rental Records</h2>
+
+    <a asp-action="Create" class="btn btn-info text-white">Add New Rental</a>
+
+    <form asp-controller="Rental" asp-action="Search" method="get" class="searchForm">
+        <input type="search" name="SearchString" class="form-control rounded searchField" placeholder="search by name">
+        <button type="submit" class="btn btn-info">Search</button>
+    </form>
+
+    <div>
+        @if (Model.Count() > 0)
+        {
+            <table class="table table-striped border">
+                <tr class="table-secondary">
+                    <th>
+                        @Html.DisplayNameFor(model => model.Scooter.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Student.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Student.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateRented)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ReturnDate)
+                    </th>
+                    <th>
+                        <span>Action</span>
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => item.Scooter.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.Student.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.Student.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.DateRented)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.ReturnDate)
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success btn-sm text-white">Edit</a>
+                </td>
+            </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <div class="alert-info">
+                No rentals added yet.
+            </div>
+
+        }
+    </div>
+
+
+</div>
