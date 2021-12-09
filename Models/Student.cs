@@ -15,10 +15,13 @@ namespace UScooter.Models
         [Display(Name = "Student Name")]
         public string Name { get; set; }
 
+        [Required]
         [Display(Name = "Student Email")]
+        [EmailAddress]
         public string Email { get; set; }
 
         [Display(Name = "Phone Number")]
+        [Phone]
         public string PhoneNumber { get; set; }
     }
 }

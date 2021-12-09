@@ -20,5 +20,94 @@ namespace UScooter.Controllers
         {
             return View(_db.Scooters.ToList());
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Scooter/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create([Bind("Id,Name,Color,PhysicalCondition,AvailabilityStatus")] Scooter scooter)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Add(scooter);
+                _db.SaveChanges();
+
+                return RedirectToAction(nameof(Index));
+            }
+            return View(scooter);
+        }
+
+        // GET: Scooter/Edit/id
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var scooter = _db.Scooters.FirstOrDefault(m => m.Id == id);
+            if (scooter == null)
+            {
+                return NotFound();
+            }
+            return View(scooter);
+        }
+
+        // POST: Scooter/Edit/id
+        [HttpPost]
+        public IActionResult Edit(int id, [Bind("Id,Name,Color,PhysicalCondition,AvailabilityStatus")] Scooter scooter)
+        {
+            if (ModelState.IsValid)
+            {
+                if (id != scooter.Id)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    _db.Update(scooter);
+                    _db.SaveChanges();
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(scooter);
+        }
+
+        // GET: Scooter/Delete/id
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var scooter = _db.Scooters.FirstOrDefault(m => m.Id == id);
+            if (scooter == null)
+            {
+                return NotFound();
+            }
+
+            return View(scooter);
+        }
+
+        // POST: Scooter/Delete/id
+        [HttpPost]
+        public IActionResult Delete(int id, bool notUsed)
+        {
+            var scooter = _db.Scooters.FirstOrDefault(m => m.Id == id);
+            if (scooter == null)
+            {
+                return NotFound();
+            }
+            _db.Scooters.Remove(scooter);
+            _db.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
