@@ -1,26 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using UScooter.Models;
 
-namespace UScooter.Models
+namespace UScooter.ViewModels
 {
-    public class Rental
+    public class RentalViewModel
     {
-        [Key]
         public int Id { get; set; }
 
-        [Required]
         public Scooter Scooter { get; set; }
 
-        [Required]
         public Student Student { get; set; }
 
-        [Display(Name = "Start Date/Time")]
         public DateTime DateRented { get; set; }
-
-        [Display(Name = "Return Date/Time")]
         public DateTime ReturnDate { get; set; }
+
+        public IEnumerable<Scooter> AvailableScooters { get; set; }
+        public IEnumerable<Student> AllStudents { get; set; }
     }
 }
