@@ -10,9 +10,11 @@ namespace UScooter.ViewModels
     {
         public int Id { get; set; }
 
-        public Scooter Scooter { get; set; }
+        public int ScooterId { get; set; }
+        public int StudentId { get; set; }
 
         public Student Student { get; set; }
+        public Scooter Scooter { get; set; }
 
         public DateTime DateRented { get; set; }
         public DateTime ReturnDate { get; set; }
